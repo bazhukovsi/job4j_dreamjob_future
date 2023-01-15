@@ -1,18 +1,19 @@
 package dreamjob.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Candidate {
     private int id;
     private String name;
     private String description;
-    private LocalDate creationDate;
+    private LocalDateTime creationDate = LocalDateTime.now();
 
     public Candidate() {
     }
 
-    public Candidate(int id, String name, String description, LocalDate creationDate) {
+    public Candidate(int id, String name, String description, LocalDateTime creationDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -43,11 +44,11 @@ public class Candidate {
         this.description = description;
     }
 
-    public LocalDate getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 

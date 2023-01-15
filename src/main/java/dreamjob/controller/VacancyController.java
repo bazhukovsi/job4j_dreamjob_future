@@ -1,8 +1,8 @@
 package dreamjob.controller;
 
 import dreamjob.model.Vacancy;
-import dreamjob.repository.MemoryVacancyRepository;
-import dreamjob.service.VacancyRepository;
+import dreamjob.service.SimpleVacancyService;
+import dreamjob.service.VacancyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +13,11 @@ import java.util.Optional;
 @RequestMapping("/vacancies")
 public class VacancyController {
 
-    private final VacancyRepository vacancyRepository = MemoryVacancyRepository.getInstance();
+    private final VacancyService vacancyService = SimpleVacancyService.getInstance();
 
     @GetMapping
     public String getAll(Model model) {
-        model.addAttribute("vacancies", vacancyRepository.findAll());
+        model.addAttribute("vacancies", vacancyService.findAll());
         return "vacancies/list";
     }
 
@@ -28,13 +28,13 @@ public class VacancyController {
 
     @PostMapping("/create")
     public String create(@ModelAttribute Vacancy vacancy) {
-        vacancyRepository.save(vacancy);
+        vacancyService.save(vacancy);
         return "redirect:/vacancies";
     }
 
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
-        Optional vacancyOptional = vacancyRepository.findById(id);
+        Optional vacancyOptional = vacancyService.findById(id);
         if (vacancyOptional.isEmpty()) {
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
             return "errors/404";
@@ -45,7 +45,7 @@ public class VacancyController {
 
     @PostMapping("/update")
     public String update(@ModelAttribute Vacancy vacancy, Model model) {
-        Boolean isUpdated = vacancyRepository.update(vacancy);
+        Boolean isUpdated = vacancyService.update(vacancy);
         if (!isUpdated) {
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
             return "errors/404";
@@ -55,7 +55,7 @@ public class VacancyController {
 
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable int id) {
-        Boolean isDeleted = vacancyRepository.deleteById(id);
+        Boolean isDeleted = vacancyService.deleteById(id);
         if (!isDeleted) {
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
             return "errors/404";

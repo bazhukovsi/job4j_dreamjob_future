@@ -22,6 +22,7 @@
                     <a class="nav-item nav-link" th:href="@{/vacancies}">Вакансии</a>
                     <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
                     <a class="nav-item nav-link" th:href="@{/vacancies/create}">Создать вакансию</a>
+                    <a class="nav-item nav-link" th:href="@{/candidates/create}">Создать кандидата</a>
                 </div>
             </div>
         </div>
@@ -35,7 +36,11 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label"><b>Описание</b></label>
-                <textarea class="form-control" id="description" name="description" th:field="*{description}" rows="25" placeholder="Опишите ваши достижения, какими технологиями владеете"></textarea>
+                <textarea class="form-control" id="description" name="description" th:field="*{description}" rows="20" placeholder="Опишите ваши достижения, какими технологиями владеете"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="creationDate" class="form-label"><b>Описание</b></label>
+                <textarea class="form-control" id="creationDate" name="creationDate" th:field="*{creationDate}" placeholder="Дата редактирования вакансии"></textarea>
             </div>
             <div class="mb-3 row">
                 <div class="col-6"></div>

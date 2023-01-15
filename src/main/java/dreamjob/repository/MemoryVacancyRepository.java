@@ -1,6 +1,6 @@
 package dreamjob.repository;
 
-import dreamjob.service.VacancyRepository;
+import dreamjob.service.VacancyService;
 import dreamjob.model.Vacancy;
 
 import java.time.LocalDateTime;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class MemoryVacancyRepository implements VacancyRepository {
+public class MemoryVacancyRepository implements VacancyService {
 
     private static final MemoryVacancyRepository INSTANCE = new MemoryVacancyRepository();
 

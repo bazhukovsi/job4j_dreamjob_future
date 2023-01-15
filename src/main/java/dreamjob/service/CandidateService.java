@@ -5,7 +5,7 @@ import dreamjob.model.Candidate;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface CandidateRepository {
+public interface CandidateService {
 
     Candidate save(Candidate candidate);
 
