@@ -1,0 +1,12 @@
+th {
+    color: chocolate;
+    background-color: burlywood;
+    border: 1px solid black;
+}
+td {
+    border: 1px solid black;
+}
+
+body {
+    background: darkseagreen;
+}
