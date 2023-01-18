@@ -13,8 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
             integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
-
     <title>Список вакансий</title>
 </head>
 <body>
@@ -23,12 +23,24 @@
         <div class="container">
             <a class="navbar-brand" href="/">Job4jDreamJob</a>
             <div class="collapse navbar-collapse">
-                <div class="navbar-nav">
+                <div class="navbar-nav me-auto">
                     <a class="nav-item nav-link" href="/">Главная</a>
                     <a class="nav-item nav-link active" th:href="@{/vacancies}">Вакансии</a>
                     <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
                     <a class="nav-item nav-link" th:href="@{/vacancies/create}">Создать вакансию</a>
                     <a class="nav-item nav-link" th:href="@{/candidates/create}">Создать кандидата</a>
+                </div>
+                <div class="d-flex">
+                    <div class="d-flex">
+                        <div class="d-flex" th:if="${user.name == 'Гость'}">
+                            <a class="nav-link text-secondary me-3" th:href="@{/users}">Регистрация</a>
+                            <a class="nav-link text-secondary" th:href="@{/users/login}">Войти</a>
+                        </div>
+                        <div class="d-flex" th:if="${user.name != 'Гость'}">
+                            <a class="nav-link text-secondary me-3" href="#" th:text="${user.name}"></a>
+                            <a class="nav-link text-secondary" th:href="@{/users/logout}">Выйти</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,9 +49,10 @@
     <br>
     <div class="container">
         <div class="row">
-            <table class="table">
+            <table class="table table-success table-striped">
                 <thead>
                 <tr>
+                    <th><i class="bi bi-square"></i></th>
                     <th scope="col">#</th>
                     <th scope="col">Имя</th>
                     <th scope="col">Дата создания вакансии</th>
@@ -47,8 +60,17 @@
                 </thead>
                 <tbody>
                 <tr th:each="vacancy: ${vacancies}">
+                    <td>
+              <span th:if="${vacancy.visible}">
+                <i class="bi bi-check-square"></i>
+              </span>
+                        <span th:if="${!vacancy.visible}">
+                  <i class="bi bi-square"></i>
+              </span>
+                    </td>
                     <td th:text="${vacancy.id}"/>
-                    <td><a th:text="${vacancy.title}" th:href="@{/vacancies/{vacancyId}(vacancyId=${vacancy.id})}"></a></td>
+                    <td><a th:text="${vacancy.title}" th:href="@{/vacancies/{vacancyId}(vacancyId=${vacancy.id})}"></a>
+                    </td>
                     <td th:text="${vacancy.creationDate}"/>
                 </tr>
                 </tbody>
